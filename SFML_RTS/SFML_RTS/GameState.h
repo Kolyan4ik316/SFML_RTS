@@ -13,4 +13,5 @@ public:
 private:
 	sf::Text text;
 	Entity player;
+	sf::Vector2f goal;
 };
