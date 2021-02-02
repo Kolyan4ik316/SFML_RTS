@@ -27,6 +27,19 @@ void GameState::Render(sf::RenderTarget* target)
 	}
 	target->draw(text);
 	player.Render(target);
+	sf::Vertex line[] =
+	{
+		sf::Vertex(sf::Vector2f(rect.left, rect.top)),
+		sf::Vertex(sf::Vector2f(rect.left, rect.height)),
+		sf::Vertex(sf::Vector2f(rect.width, rect.top)),
+		sf::Vertex(sf::Vector2f(rect.width, rect.height)),
+		sf::Vertex(sf::Vector2f(rect.left, rect.top)),
+		sf::Vertex(sf::Vector2f(rect.width, rect.top)),
+		sf::Vertex(sf::Vector2f(rect.left, rect.height)),
+		sf::Vertex(sf::Vector2f(rect.width, rect.height))
+	};
+
+	target->draw(line, 8, sf::Lines);
 }
 
 void GameState::UpdateInput(const float& dt)
@@ -34,11 +47,10 @@ void GameState::UpdateInput(const float& dt)
 	if (IsFocused())
 	{
 		sf::Vector2f dir(0.0f, 0.0f);
-		 
+		sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
-			goal = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
-			//player.SetPosition((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
+			goal = mousePos;
 		}
 		if (player.GetPosition().x < goal.x)
 		{
@@ -57,6 +69,15 @@ void GameState::UpdateInput(const float& dt)
 			dir += sf::Vector2f(0.0f, -1.0f);
 		}
 		player.SetDirection(dir);
+
+		while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			rect.left = mousePos.x;
+			rect.top = mousePos.y;
+
+			rect.width = (float)sf::Mouse::getPosition(*window).x; 
+			rect.height = (float)sf::Mouse::getPosition(*window).y;
+		}
 	}
 	
 }

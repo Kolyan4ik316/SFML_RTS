@@ -14,4 +14,6 @@ private:
 	sf::Text text;
 	Entity player;
 	sf::Vector2f goal;
+	sf::Rect<float> rect;
+
 };
