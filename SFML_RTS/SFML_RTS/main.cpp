@@ -1,44 +1,27 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Game.h"
+#include <Windows.h>
+#pragma comment(lib, "Winmm.lib")
 
 
+/*int WINAPI WinMain(HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPSTR lpCmdLine,
+	int nCmdShow)*/
 int main()
 {
-	std::shared_ptr<sf::RenderWindow> window;
-	window = std::make_shared<sf::RenderWindow>(sf::VideoMode(640, 480), "SFML Real Time Strategy", sf::Style::Close);	
-	window->setFramerateLimit(60);
-	window->setVerticalSyncEnabled(false);
-	sf::Event sfEvent;
-	while (window->isOpen())
+	try
 	{
-		while (window->pollEvent(sfEvent))
-		{
-			switch (sfEvent.type)
-			{
-			case sf::Event::Closed:
-			{
-				window->close();
-			}
-			break;
-			case sf::Event::Resized:
-			{
+		Game game;
+		game.Run();
 
-			}
-			break;
-			case sf::Event::GainedFocus:
-			{
-
-			}
-			break;
-			case sf::Event::LostFocus:
-			{
-
-			}
-			break;
-			}
-
-		}
 	}
-	
+	catch (std::exception& e)
+	{
+		MessageBoxA(NULL, e.what(), "Exception was throwned!", MB_OK);
+	}
+	catch (...)
+	{
+		MessageBoxA(NULL, "Uknown reason", "Exception was throwned!", MB_OK);
+	}
 	return 0;
 }
