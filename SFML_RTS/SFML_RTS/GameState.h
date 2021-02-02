@@ -12,4 +12,5 @@ public:
 	virtual ~GameState();
 private:
 	sf::Text text;
+	Entity player;
 };

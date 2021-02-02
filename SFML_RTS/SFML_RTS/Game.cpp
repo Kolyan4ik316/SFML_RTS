@@ -44,7 +44,7 @@ void Game::Update()
 	if (!states.empty())
 	{
 		states.top()->FocusedState(focused);
-		states.top()->Update(float(clock.getElapsedTime().asMilliseconds()));
+		states.top()->Update(float(clock.getElapsedTime().asSeconds()));
 
 		if (states.top()->GetQuit())
 		{
