@@ -11,6 +11,7 @@ void MouseManager::Update(const float& dt)
 	{
 		isSelecting = true;
 		auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
+		
 		selectedArea = GetScreenRect(startMousePos, mousePos);
 	}
 	else
@@ -28,13 +29,13 @@ void MouseManager::Render(sf::RenderTarget* target)
 		sf::Vertex line[] =
 		{
 			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.height)),
-			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.height)),
+			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height)),
+			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top)),
+			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height)),
 			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.height)),
-			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.height))
+			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top)),
+			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height)),
+			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height))
 		};
 
 		target->draw(line, 8, sf::Lines);
@@ -48,7 +49,7 @@ const sf::Rect<float> MouseManager::GetSelectedArea() const
 }
 sf::Rect<float> MouseManager::GetScreenRect(const sf::Vector2f& startPos, const sf::Vector2f& endPos) const
 {
-	return sf::Rect<float>(GetSmallerVector(startPos, endPos), GetBiggerVector(startPos, endPos));
+	return sf::Rect<float>(GetSmallerVector(startPos, endPos), GetBiggerVector(endPos - startPos, startPos - endPos));
 }
 MouseManager::~MouseManager()
 {
