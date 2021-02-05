@@ -10,8 +10,8 @@ void MouseManager::Update(const float& dt)
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		isSelecting = true;
-		
-		
+		auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
+		selectedArea = GetScreenRect(startMousePos, mousePos);
 	}
 	else
 	{
@@ -25,18 +25,16 @@ void MouseManager::Render(sf::RenderTarget* target)
 {
 	if (isSelecting)
 	{
-		auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
-		auto rect = GetScreenRect(startMousePos, mousePos);
 		sf::Vertex line[] =
 		{
-			sf::Vertex(sf::Vector2f(rect.left, rect.top)),
-			sf::Vertex(sf::Vector2f(rect.left, rect.height)),
-			sf::Vertex(sf::Vector2f(rect.width, rect.top)),
-			sf::Vertex(sf::Vector2f(rect.width, rect.height)),
-			sf::Vertex(sf::Vector2f(rect.left, rect.top)),
-			sf::Vertex(sf::Vector2f(rect.width, rect.top)),
-			sf::Vertex(sf::Vector2f(rect.left, rect.height)),
-			sf::Vertex(sf::Vector2f(rect.width, rect.height))
+			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top)),
+			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.height)),
+			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.top)),
+			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.height)),
+			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top)),
+			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.top)),
+			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.height)),
+			sf::Vertex(sf::Vector2f(selectedArea.width, selectedArea.height))
 		};
 
 		target->draw(line, 8, sf::Lines);
@@ -44,12 +42,13 @@ void MouseManager::Render(sf::RenderTarget* target)
 	}
 	
 }
+const sf::Rect<float> MouseManager::GetSelectedArea() const
+{
+	return selectedArea;
+}
 sf::Rect<float> MouseManager::GetScreenRect(const sf::Vector2f& startPos, const sf::Vector2f& endPos) const
 {
-	//sf::Vector2f topLeft = std::min(startPos, endPos);
-	//sf::Vector2f bottomRight = std::max(startPos, endPos);
 	return sf::Rect<float>(GetSmallerVector(startPos, endPos), GetBiggerVector(startPos, endPos));
-	//return sf::Rect<float>(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
 }
 MouseManager::~MouseManager()
 {

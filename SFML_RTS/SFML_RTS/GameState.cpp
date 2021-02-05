@@ -37,13 +37,23 @@ void GameState::UpdateInput(const float& dt)
 	{
 		
 		mouseManager.Update(dt);
-		
-		
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		if (mouseManager.GetSelectedArea().intersects(player.GetRect().getGlobalBounds()))
 		{
-			auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
-			player.SetGoal(mousePos);
+			player.SetSelected(true);
 		}
+		else
+		{
+			player.SetSelected(false);
+		}
+		if (player.IsSelected())
+		{
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+			{
+				auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
+				player.SetGoal(mousePos);
+			}
+		}
+		
 	}
 	
 }

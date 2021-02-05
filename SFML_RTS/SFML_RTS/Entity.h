@@ -14,6 +14,7 @@ public:
 	virtual const sf::Vector2f GetPosition() const;
 	virtual const bool IsSelected() const;
 	virtual void SetSelected(const bool& selected);
+	virtual const sf::RectangleShape GetRect() const;
 	virtual ~Entity();
 protected:
 	virtual void MoveToGoal() const;

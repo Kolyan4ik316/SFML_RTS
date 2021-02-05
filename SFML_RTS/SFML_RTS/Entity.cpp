@@ -18,13 +18,20 @@ void Entity::Update(const float& dt)
 }
 void Entity::Render(sf::RenderTarget* target)
 {
+	if (isSelected)
+	{
+		sprite.setFillColor(sf::Color::Red);
+	}
+	else
+	{
+		sprite.setFillColor(sf::Color::White);
+	}
 	target->draw(sprite);
 }
 void Entity::SetPosition(const sf::Vector2f& pos_in)
 {
 	pos = pos_in;
 }
-
 
 void Entity::MoveToGoal() const
 {
@@ -92,6 +99,10 @@ const bool Entity::IsSelected() const
 void Entity::SetSelected(const bool& selected)
 {
 	isSelected = selected;
+}
+const sf::RectangleShape Entity::GetRect() const
+{
+	return sprite;
 }
 Entity::~Entity()
 {
