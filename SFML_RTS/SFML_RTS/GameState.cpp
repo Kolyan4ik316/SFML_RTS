@@ -2,7 +2,8 @@
 
 GameState::GameState(std::shared_ptr<sf::RenderWindow> window)
 	: 
-	State(window)
+	State(window),
+	mouseManager(window)
 {
 	text.setFont(font);
 	text.setString("Daddy would you like some sausages?");
@@ -27,19 +28,7 @@ void GameState::Render(sf::RenderTarget* target)
 	}
 	target->draw(text);
 	player.Render(target);
-	sf::Vertex line[] =
-	{
-		sf::Vertex(sf::Vector2f(rect.left, rect.top)),
-		sf::Vertex(sf::Vector2f(rect.left, rect.height)),
-		sf::Vertex(sf::Vector2f(rect.width, rect.top)),
-		sf::Vertex(sf::Vector2f(rect.width, rect.height)),
-		sf::Vertex(sf::Vector2f(rect.left, rect.top)),
-		sf::Vertex(sf::Vector2f(rect.width, rect.top)),
-		sf::Vertex(sf::Vector2f(rect.left, rect.height)),
-		sf::Vertex(sf::Vector2f(rect.width, rect.height))
-	};
-
-	target->draw(line, 8, sf::Lines);
+	mouseManager.Render(target);
 }
 
 void GameState::UpdateInput(const float& dt)
@@ -47,19 +36,13 @@ void GameState::UpdateInput(const float& dt)
 	if (IsFocused())
 	{
 		
-		sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
+		mouseManager.Update(dt);
+		
+		
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
+			auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
 			player.SetGoal(mousePos);
-		}
-
-		while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			rect.left = mousePos.x;
-			rect.top = mousePos.y;
-
-			rect.width = (float)sf::Mouse::getPosition(*window).x; 
-			rect.height = (float)sf::Mouse::getPosition(*window).y;
 		}
 	}
 	

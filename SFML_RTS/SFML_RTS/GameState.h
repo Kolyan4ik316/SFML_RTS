@@ -1,7 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Entity.h"
-
+#include "MouseManager.h"
 class GameState : public State
 {
 public:
@@ -13,6 +13,6 @@ public:
 private:
 	sf::Text text;
 	Entity player;
-	sf::Rect<float> rect;
-
+	MouseManager mouseManager;
+	sf::Vector2f mousePos;
 };
