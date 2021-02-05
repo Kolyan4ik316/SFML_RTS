@@ -9,8 +9,7 @@ GameState::GameState(std::shared_ptr<sf::RenderWindow> window)
 	text.setPosition(sf::Vector2f(1280.0f / 2.0f, 720.0f / 2.0f));
 	text.setOrigin(sf::Vector2f(text.getLocalBounds().width / 2.0f, text.getLocalBounds().height / 2.0f));
 	player.SetPosition(sf::Vector2f(1280.0f / 2.0f, 720.0f / 2.0f));
-	goal = sf::Vector2f(1280.0f / 2.0f, 720.0f / 2.0f);
-	player.SetGoal(goal);
+	player.SetGoal(sf::Vector2f(1280.0f / 2.0f, 720.0f / 2.0f));
 }
 
 void GameState::Update(const float& dt)

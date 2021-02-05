@@ -12,6 +12,8 @@ public:
 	virtual void SetGoal(const sf::Vector2f& goal_in);
 	virtual const sf::Vector2f GetGoal() const;
 	virtual const sf::Vector2f GetPosition() const;
+	virtual const bool IsSelected() const;
+	virtual void SetSelected(const bool& selected);
 	virtual ~Entity();
 protected:
 	virtual void MoveToGoal() const;
@@ -23,6 +25,7 @@ protected:
 	float movementSpeed = 60;
 	bool loadedTexture = false;
 	sf::Vector2f goal;
+	bool isSelected = false;
 private:
 
 };

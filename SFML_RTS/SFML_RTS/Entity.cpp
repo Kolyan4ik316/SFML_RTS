@@ -24,31 +24,27 @@ void Entity::SetPosition(const sf::Vector2f& pos_in)
 {
 	pos = pos_in;
 }
-Entity::~Entity()
-{
 
-}
 
 void Entity::MoveToGoal() const
 {
-	sf::Vector2f temp_dir(0.0f, 0.0f);
+	dir = sf::Vector2f(0.0f, 0.0f);
 	if (GetPosition().x < goal.x)
 	{
-		temp_dir += sf::Vector2f(1.0f, 0.0f);
+		dir += sf::Vector2f(1.0f, 0.0f);
 	}
 	if (GetPosition().x > goal.x)
 	{
-		temp_dir += sf::Vector2f(-1.0f, 0.0f);
+		dir += sf::Vector2f(-1.0f, 0.0f);
 	}
 	if (GetPosition().y < goal.y)
 	{
-		temp_dir += sf::Vector2f(0.0f, 1.0f);
+		dir += sf::Vector2f(0.0f, 1.0f);
 	}
 	if (GetPosition().y > goal.y)
 	{
-		temp_dir += sf::Vector2f(0.0f, -1.0f);
+		dir += sf::Vector2f(0.0f, -1.0f);
 	}
-	dir = temp_dir;
 
 }
 
@@ -86,4 +82,18 @@ const sf::Vector2f Entity::GetGoal() const
 const sf::Vector2f Entity::GetPosition() const
 {
 	return pos;
+}
+
+const bool Entity::IsSelected() const
+{
+	return isSelected;
+}
+
+void Entity::SetSelected(const bool& selected)
+{
+	isSelected = selected;
+}
+Entity::~Entity()
+{
+
 }

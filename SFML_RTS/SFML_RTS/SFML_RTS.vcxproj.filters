@@ -19,6 +19,9 @@
     <Filter Include="Etities">
       <UniqueIdentifier>{2c36d4dc-26da-465f-b52b-64be4da9d8b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{321900dc-38bd-4848-a5e4-948589a305c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Etities</Filter>
     </ClCompile>
+    <ClCompile Include="MouseManager.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Etities</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseManager.h">
+      <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
