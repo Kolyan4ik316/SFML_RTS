@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
 #include "GameState.h"
 
 class Game
@@ -23,3 +24,4 @@ private:
 
 	bool focused = true;
 };
+#endif

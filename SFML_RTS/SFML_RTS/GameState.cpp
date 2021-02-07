@@ -3,7 +3,7 @@
 GameState::GameState(std::shared_ptr<sf::RenderWindow> window)
 	: 
 	State(window),
-	mouseManager(window)
+	unitSelector(window)
 {
 	text.setFont(font);
 	text.setString("Daddy would you like some sausages?");
@@ -28,7 +28,7 @@ void GameState::Render(sf::RenderTarget* target)
 	}
 	target->draw(text);
 	player.Render(target);
-	mouseManager.Render(target);
+	unitSelector.Render(target);
 }
 
 void GameState::UpdateInput(const float& dt)
@@ -36,8 +36,8 @@ void GameState::UpdateInput(const float& dt)
 	if (IsFocused())
 	{
 		
-		mouseManager.Update(dt);
-		if (mouseManager.GetSelectedArea().intersects(player.GetRect().getGlobalBounds()))
+		unitSelector.Update(dt);
+		if (unitSelector.GetSelectedArea().intersects(player.GetRect().getGlobalBounds()))
 		{
 			player.SetSelected(true);
 		}
@@ -51,6 +51,7 @@ void GameState::UpdateInput(const float& dt)
 			{
 				auto mousePos = sf::Vector2f((float)sf::Mouse::getPosition(*window).x, (float)sf::Mouse::getPosition(*window).y);
 				player.SetGoal(mousePos);
+				unitSelector.ResetSelectedArea();
 			}
 		}
 		

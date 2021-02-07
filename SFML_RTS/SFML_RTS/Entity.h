@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENTITY_H
+#define ENTITY_H
 #include "State.h"
 class Entity
 {
@@ -30,4 +31,5 @@ protected:
 private:
 
 };
+#endif
 

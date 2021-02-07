@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STATE_H
+#define STATE_H
 
 #include <vector>
 #include <string>
@@ -18,7 +19,7 @@ class State
 public:
 	State(std::shared_ptr<sf::RenderWindow> window);
 	virtual void Update(const float& dt) = 0;
-	virtual void Render(sf::RenderTarget* target = nullptr) = 0;
+	virtual void Render(sf::RenderTarget* target = NULL) = 0;
 	virtual void UpdateInput(const float& dt) = 0;
 	virtual void FocusedState(const bool& isFocused);
 	virtual void EndState();
@@ -32,3 +33,4 @@ private:
 	bool quit = false;
 	bool focused = true;
 };
+#endif

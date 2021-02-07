@@ -1,13 +1,15 @@
-#pragma once
+#ifndef UNITSELECTOR_H
+#define UNITSELECTOR_H
 #include "SFML/Graphics.hpp"
-class MouseManager
+class UnitSelector
 {
 public:
-	MouseManager(std::shared_ptr<sf::RenderWindow> window);
+	UnitSelector(std::shared_ptr<sf::RenderWindow> window);
 	virtual void Update(const float& dt);
 	virtual void Render(sf::RenderTarget* target);
 	const sf::Rect<float> GetSelectedArea() const;
-	virtual ~MouseManager();
+	void ResetSelectedArea();
+	virtual ~UnitSelector();
 private:
 	virtual sf::Rect<float> GetScreenRect(const sf::Vector2f& startPos, const sf::Vector2f& endPos) const;
 	const sf::Vector2f GetSmallerVector(const sf::Vector2f& vec1, const sf::Vector2f& vec2) const;
@@ -17,3 +19,4 @@ private:
 	std::shared_ptr<sf::RenderWindow> window;
 	sf::Rect<float> selectedArea;
 };
+#endif
