@@ -22,6 +22,12 @@
     <Filter Include="Misc">
       <UniqueIdentifier>{321900dc-38bd-4848-a5e4-948589a305c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Etities\Dynamic Entities">
+      <UniqueIdentifier>{c07534fd-3440-4a9b-9fce-265ec15fed0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Etities\Static Entities">
+      <UniqueIdentifier>{6f55ed47-ef69-47c5-82e6-f1e2bb979e49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

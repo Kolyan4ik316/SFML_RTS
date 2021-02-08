@@ -17,11 +17,11 @@ int main()
 	}
 	catch (std::exception& e)
 	{
-		MessageBoxA(NULL, e.what(), "Exception was throwned!", MB_OK);
+		MessageBoxA(NULL, e.what(), "Exception was throwned!", MB_OK | MB_ICONERROR | MB_APPLMODAL);
 	}
 	catch (...)
 	{
-		MessageBoxA(NULL, "Uknown reason", "Exception was throwned!", MB_OK);
+		MessageBoxA(NULL, "Uknown reason", "Exception was throwned!", MB_OK | MB_ICONERROR | MB_APPLMODAL);
 	}
 	return 0;
 }

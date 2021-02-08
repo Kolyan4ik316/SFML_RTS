@@ -26,19 +26,26 @@ void UnitSelector::Render(sf::RenderTarget* target)
 {
 	if (isSelecting)
 	{
-		sf::Vertex line[] =
+		std::vector<sf::Vertex> lines;
+		for (float i = 0.0f; i < 5.0f; i += 1.0f)
 		{
-			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height)),
-			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height)),
-			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top)),
-			sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height)),
-			sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height))
-		};
-
-		target->draw(line, 8, sf::Lines);
+			sf::Vertex line[] =
+			{
+				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top+ i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top + selectedArea.height + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top + selectedArea.height + i))
+			};
+			for (unsigned int j = 0; j < 8; j++)
+			{
+				lines.push_back(line[j]);
+			}	
+		}
+		target->draw(lines.data(), lines.size(), sf::Lines);
 
 	}
 	

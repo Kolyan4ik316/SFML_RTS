@@ -70,7 +70,7 @@ void Entity::LoadTextureFromImage(sf::Image& image, sf::IntRect rect)
 {
 	if (!texture.loadFromImage(image, rect))
 	{
-		std::string error = std::string("Error with loading texture! ");
+		std::string error = std::string("Error with loading texture from image! ");
 		throw(std::exception(error.c_str()));
 	}
 	//sprite.setTexture(texture);
