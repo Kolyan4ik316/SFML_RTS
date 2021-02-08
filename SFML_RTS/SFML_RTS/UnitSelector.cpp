@@ -31,14 +31,14 @@ void UnitSelector::Render(sf::RenderTarget* target)
 		{
 			sf::Vertex line[] =
 			{
-				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top+ i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top + selectedArea.height + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width + i, selectedArea.top + selectedArea.height + i))
+				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width - i, selectedArea.top )),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width - i, selectedArea.top + selectedArea.height )),
+				sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height - i)),
+				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height - i))
 			};
 			for (unsigned int j = 0; j < 8; j++)
 			{
