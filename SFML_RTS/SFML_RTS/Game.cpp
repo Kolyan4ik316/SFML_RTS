@@ -1,24 +1,74 @@
 #include "Game.h"
-
+State::GamePreference Game::prefernce = { sf::VideoMode(1280, 720), 60, false };
 void Game::InitWindow()
 {
-	std::ifstream ifs("Configs\\window.ini");
-	sf::VideoMode windowConfig(1280, 720);
+	std::string path = "Configs\\window.ini";
+	std::ifstream ifs(path.c_str());
 	std::string windowName = "SFML Real Time Strategy";
-	unsigned int frameRateLimit = 60;
-	bool vsync = false;
 
 	if (ifs.is_open())
 	{
-		std::getline(ifs, windowName);
-		ifs >> windowConfig.width >> windowConfig.height;
-		ifs >> frameRateLimit;
-		ifs >> vsync;
+		std::string tempStr;
+		while (!ifs.eof())
+		{
+			ifs >> tempStr;
+			if (!tempStr.compare("[Window_Width]"))
+			{
+				ifs >> prefernce.windowConfig.width;
+			}
+			if (!tempStr.compare("[Window_Height]"))
+			{
+				ifs >> prefernce.windowConfig.height;
+			}
+			if (!tempStr.compare("[Frame_limit]"))
+			{
+				ifs >> prefernce.frameRateLimit;
+			}
+			if (!tempStr.compare("[Vsync]"))
+			{
+				ifs >> prefernce.vsync;
+			}
+			if (!tempStr.compare("[Window_Name]"))
+			{
+				windowName.clear();
+				while (getline(ifs, tempStr))
+				{
+					windowName += tempStr;
+				}
+			}
+		}
+	}
+	else
+	{
+		//if not exist creating new file in same path
+		std::ofstream ofs;
+		ofs.open(path.c_str());
+		if (ofs.is_open())
+		{
+			//Writing variables
+			ofs << "[Window_Width]\n"
+				<< prefernce.windowConfig.width << "\n"
+				<< "[Window_Height]\n"
+				<< prefernce.windowConfig.height << "\n"
+				<< "[Frame_limit]\n"
+				<< prefernce.frameRateLimit << "\n"
+				<< "[Vsync]\n"
+				<< prefernce.vsync << "\n"
+				<< "[Window_Name]\n"
+				<< windowName.c_str() << "\n";
+		}
+		else
+		{
+			// if can't create
+			std::string error = "Unknown error while writing to file " + path;
+			throw(std::exception(error.c_str()));
+		}
+		ofs.close();
 	}
 	ifs.close();
-	window = std::make_shared<sf::RenderWindow>(windowConfig, windowName, sf::Style::Close);
-	window->setFramerateLimit(frameRateLimit);
-	window->setVerticalSyncEnabled(vsync);
+	window = std::make_shared<sf::RenderWindow>(prefernce.windowConfig, windowName, sf::Style::Close);
+	window->setFramerateLimit(prefernce.frameRateLimit);
+	window->setVerticalSyncEnabled(prefernce.vsync);
 }
 
 void Game::InitStates()

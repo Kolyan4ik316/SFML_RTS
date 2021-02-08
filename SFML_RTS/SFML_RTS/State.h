@@ -17,6 +17,13 @@
 class State
 {
 public:
+	struct GamePreference
+	{
+		sf::VideoMode windowConfig;
+		unsigned int frameRateLimit;
+		bool vsync;
+	};
+public:
 	State(std::shared_ptr<sf::RenderWindow> window);
 	virtual void Update(const float& dt) = 0;
 	virtual void Render(sf::RenderTarget* target = NULL) = 0;
@@ -32,5 +39,6 @@ protected:
 private:
 	bool quit = false;
 	bool focused = true;
+	static GamePreference preference;
 };
 #endif

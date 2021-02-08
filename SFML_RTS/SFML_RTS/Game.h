@@ -21,7 +21,8 @@ private:
 	std::shared_ptr<sf::RenderWindow> window;
 	sf::Event sfEvent;
 	sf::Clock clock;
-
 	bool focused = true;
+private:
+	static State::GamePreference prefernce;
 };
 #endif

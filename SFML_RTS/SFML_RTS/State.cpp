@@ -1,5 +1,5 @@
 #include "State.h"
-
+State::GamePreference State::preference;
 State::State(std::shared_ptr<sf::RenderWindow> window)
 	:
 	window(window)

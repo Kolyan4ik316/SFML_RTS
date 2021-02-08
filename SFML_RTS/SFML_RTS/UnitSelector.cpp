@@ -29,21 +29,16 @@ void UnitSelector::Render(sf::RenderTarget* target)
 		std::vector<sf::Vertex> lines;
 		for (float i = 0.0f; i < 5.0f; i += 1.0f)
 		{
-			sf::Vertex line[] =
-			{
-				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width - i, selectedArea.top )),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width - i, selectedArea.top + selectedArea.height )),
-				sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height - i)),
-				sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height - i))
-			};
-			for (unsigned int j = 0; j < 8; j++)
-			{
-				lines.push_back(line[j]);
-			}	
+			
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left + i, selectedArea.top + selectedArea.height)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width - i, selectedArea.top)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width - i, selectedArea.top + selectedArea.height)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + i)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + i)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left, selectedArea.top + selectedArea.height - i)));
+			lines.push_back(sf::Vertex(sf::Vector2f(selectedArea.left + selectedArea.width, selectedArea.top + selectedArea.height - i)));
+				
 		}
 		target->draw(lines.data(), lines.size(), sf::Lines);
 
