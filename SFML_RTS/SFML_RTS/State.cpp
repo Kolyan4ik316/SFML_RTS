@@ -4,9 +4,11 @@ State::State(std::shared_ptr<sf::RenderWindow> window)
 	:
 	window(window)
 {
-	if (!font.loadFromFile("Resources\\arial.ttf"))
+	std::string path = "Resources\\arial.ttf";
+	if (!font.loadFromFile(path.c_str()))
 	{
-		throw(std::exception("Can't find your font!"));
+		std::string error = "Can't find font " + path;
+		throw(std::exception(error.c_str()));
 	}
 	
 }
